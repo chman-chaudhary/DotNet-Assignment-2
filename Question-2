@@ -1,0 +1,96 @@
+using System;
+
+public interface Account
+{
+    void Open_Account();
+    void Close_Account();
+}
+
+public interface Customer
+{
+    void Display_Customer_Detail();
+}
+
+class SavingAccount : Account, Customer
+{
+    public string CustomerName;
+    public int Account_Number;
+    public double Balance;
+
+    public static string BankName;
+
+    public SavingAccount()
+    {
+        CustomerName = "Unknown";
+        Account_Number = 0;
+        Balance = 0.0;
+    }
+
+    public SavingAccount(string customerName, int accountNumber, double balance)
+    {
+        CustomerName = customerName;
+        Account_Number = accountNumber;
+        Balance = balance;
+    }
+
+    static SavingAccount()
+    {
+        BankName = "XYZ Bank";
+    }
+
+    public void Open_Account()
+    {
+        Console.WriteLine("Account opened successfully for " + CustomerName);
+    }
+    
+    public void Close_Account()
+    {
+        Console.WriteLine("Account closed successfully for " + CustomerName);
+    }
+
+    public void Display_Customer_Detail()
+    {
+        Console.WriteLine($"Customer Name: {CustomerName}");
+        Console.WriteLine($"Account Number: {Account_Number}");
+        Console.WriteLine($"Balance: {Balance}");
+    }
+
+    public void Withdraw(double amount)
+    {
+        if (Balance >= amount)
+        {
+            Balance -= amount;
+            Console.WriteLine($"Withdrawn: {amount}. New Balance: {Balance}");
+        }
+        else
+        {
+            Console.WriteLine("Insufficient balance.");
+        }
+    }
+
+    public void Deposit(double amount)
+    {
+        Balance += amount;
+        Console.WriteLine($"Deposited: {amount}. New Balance: {Balance}");
+    }
+
+    public void Check_And_Display_Balance()
+    {
+        Console.WriteLine($"Current Balance: {Balance}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+
+        SavingAccount acc1 = new SavingAccount("Rahul", 12345, 1000);
+        acc1.Display_Customer_Detail();
+        acc1.Open_Account();
+        acc1.Deposit(500);
+        acc1.Withdraw(200);
+        acc1.Check_And_Display_Balance();
+        acc1.Close_Account();
+    }
+}
