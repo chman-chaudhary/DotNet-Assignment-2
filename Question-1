@@ -1,0 +1,85 @@
+using System;
+
+class Student
+{
+    public string Name;
+    public int RollNo;
+    public int[] Marks = new int[5];
+    public int total_marks;
+    public double percentage;
+
+    public static string University_Name;
+
+    public Student()
+    {
+        Name = "Unknown";
+        RollNo = 0;
+        total_marks = 0;
+        percentage = 0.0;
+    }
+
+    public Student(string name, int rollNo, int[] marks)
+    {
+        Name = name;
+        RollNo = rollNo;
+        Marks = marks;
+        Calculate_result();
+    }
+
+    static Student()
+    {
+        University_Name = "XYZ University";
+    }
+
+    public void Read_data()
+    {
+        Console.WriteLine("Enter Name: ");
+        Name = Console.ReadLine();
+        Console.WriteLine("Enter Roll Number: ");
+        RollNo = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter Marks for 5 Subjects: ");
+        for (int i = 0; i < 5; i++)
+        {
+            Marks[i] = int.Parse(Console.ReadLine());
+        }
+
+        Calculate_result();
+    }
+
+    public void Calculate_result()
+    {
+        total_marks = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            total_marks += Marks[i];
+        }
+
+        percentage = (total_marks / 5.0);
+    }
+
+    public void Display()
+    {
+        Console.WriteLine($"University: {University_Name}");
+        Console.WriteLine($"Name: {Name}");
+        Console.WriteLine($"Roll No: {RollNo}");
+        Console.WriteLine("Marks: ");
+        for (int i = 0; i < 5; i++)
+        {
+            Console.Write(Marks[i] + " ");
+        }
+        Console.WriteLine();
+        Console.WriteLine($"Total Marks: {total_marks}");
+        Console.WriteLine($"Percentage: {percentage}%");
+    }
+}
+
+class Program {
+    static void Main(string[] args) {
+        Console.WriteLine("Student Details:");
+        Student s1 = new Student();
+        s1.Read_data();
+        s1.Display();
+    }
+}
+
