@@ -28,7 +28,7 @@ class Student
 
     static Student()
     {
-        University_Name = "XYZ University";
+        University_Name = "GLA University";
     }
 
     public void Read_data()
